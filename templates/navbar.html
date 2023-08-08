@@ -1,0 +1,130 @@
+{% load static %}
+
+<div
+  style="background-color: transparent"
+  class="fixed w-full h-20 z-[100] md:px-24"
+>
+  <div
+    class="flex justify-between items-center w-full h-full md:px-4 py-4 px-2 2xl:px-16 rounded"
+  >
+    <div class="">
+      <a class="text-[#eee] font-bold text-3xl font-allura" href="">Munchies</a>
+    </div>
+    <div>
+      <div
+        class="w-72 h-10 bg-[#fff] flex justify-center items-center rounded-md"
+      >
+        <input
+          type="text"
+          class="text-center rounded-md outline-none"
+          placeholder="Your current location"
+        />
+        {% comment %} map icon fontawesome {% endcomment %}
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+    </div>
+    <div>
+      <ul class="hidden md:flex font-barlow" style="color: #ecf0f3">
+        <li
+          class="ml-10 font-medium text-[#eee] uppercase text-sm hover:text-[#cda873] hover:scale-105 transition-colors duration-300"
+        >
+          <a href="">Home</a>
+        </li>
+
+        <li
+          class="ml-10 font-medium text-[#eee] uppercase text-sm hover:text-[#cda873] hover:scale-105 transition-all duration-all hover:border-y-black"
+        >
+          <a href="">Listings</a>
+        </li>
+        <li
+          class="ml-10 font-medium text-[#eee] uppercase text-sm hover:text-[#cda873] hover:scale-105 transition-all duration-all hover:border-y-black"
+        >
+          <a href="">Tenant</a>
+        </li>
+        <li
+          class="ml-10 font-medium text-[#eee] uppercase text-sm hover:text-[#cda873] hover:scale-105 transition-all duration-all hover:border-y-black"
+        >
+          <a href="">Agents</a>
+        </li>
+        <li
+          class="ml-10 font-medium text-[#eee] uppercase text-sm hover:text-[#cda873] hover:scale-105 transition-all duration-all hover:border-y-black"
+        >
+          <a href="">Contact us</a>
+        </li>
+      </ul>
+      <div
+        id="mobileMenuIcon"
+        class="md:hidden flex justify-between items-center w-full h-full"
+        style="color: #ecf0f3"
+      >
+        <i class="fa fa-bars text-[#fff] text-3xl"></i>
+      </div>
+    </div>
+    <div class="hidden md:block">
+      <div>
+        <button
+          class="uppercase text-[#000] font-light font-barlow bg-[#fff] px-4 py-2 hover:bg-[#cda873] transition-all duration-300"
+        >
+          <a href=""> Login </a>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    id="mobileMenu"
+    class="md:hidden fixed left-0 top-0 w-full h-screen bg-black/95 hidden"
+  >
+    <div>
+      <div class="flex justify-between items-center w-full mt-3 px-3">
+        <a class="text-[#eee] font-bold text-3xl font-allura" href=""
+          >Munchies</a
+        >
+        <div id="close-icon" class="cursor-pointer text-[#fff] text-3xl">
+          <i class="fa fa-times"></i>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="flex flex-col items-center text-[#fff] font-barlow py-4">
+        <ul>
+          <li class="ml-3 mt-10 text-xl uppercase">
+            <a href="">Home</a>
+          </li>
+          <li class="py-4 mt-10 text-xl ml-3 cursor-pointer uppercase">
+            <a href="">Listing</a>
+          </li>
+          <li class="ml-3 mt-10 text-xl uppercase">
+            <a href="">Tenant</a>
+          </li>
+
+          <li class="py-4 mt-10 text-xl ml-3 cursor-pointer uppercase">
+            <a href="">Agents</a>
+          </li>
+          <li class="py-4 mt-10 text-xl ml-3 cursor-pointer uppercase">
+            <a href="">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const handleMobileNav = () => {
+      const mobileMenu = document.getElementById("mobileMenu");
+      const body = document.body;
+      if (mobileMenu.classList.contains("hidden")) {
+        mobileMenu.classList.remove("hidden");
+        body.style.overflow = "hidden";
+      } else {
+        mobileMenu.classList.add("hidden");
+        body.style.overflow = "auto";
+      }
+    };
+
+    const mobileMenuIcon = document.getElementById("mobileMenuIcon");
+    const closeIcon = document.getElementById("close-icon");
+    mobileMenuIcon.addEventListener("click", handleMobileNav);
+    closeIcon.addEventListener("click", handleMobileNav);
+  </script>
+</div>

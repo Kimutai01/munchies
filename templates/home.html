@@ -1,0 +1,287 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<div class="hero-bg">
+  <div class="w-[50%]">
+    <h2 class="font-barlow text-center text-2xl text-[#ff5634]">
+      FOOD DELIVERY SERVICE
+    </h2>
+    <h1 class="font-barlow text-center text-5xl text-white">
+      Delicious food at your fingertips
+    </h1>
+    <p class="text-gray-400 font-gilda text-center mt-5">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
+      voluptatibus, voluptatem, quibusdam, quia voluptates voluptatum voluptate
+      quos doloribus quod quas? Quisquam voluptatibus, voluptatem, quibusdam,
+      quia voluptates voluptatum voluptate quos doloribus quod quas?
+    </p>
+    <div class="flex items-center gap-5 mt-10">
+      <input
+        type="text"
+        class="w-[50%] h-10 rounded-md px-5 outline-none"
+        placeholder="Search for food"
+      />
+      <div class="bg-[#fff] rounded-md items-center h-10 w-72 px-5">
+        <i class="fa-solid fa-location-dot"></i>
+        <input
+          type="text"
+          class="w-[80%] rounded-md mt-2 outline-none"
+          placeholder="All locations"
+        />
+      </div>
+      <input
+        type="text"
+        class="w-[50%] h-10 rounded-md px-5 outline-none"
+        placeholder="Choose radius"
+      />
+      <button class="bg-[#ff5634] text-white rounded-md px-5 py-2">
+        Search
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="w-[90%] mx-auto mt-20">
+  <h1 class="font-barlow text-5xl capitalize text-[#ff5634]">
+    Top restaurants
+  </h1>
+  <p class="font-gilda text-gray-400 mt-5">
+    Explore restaurants, bars, and cafés by locality
+  </p>
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-5 items-center mt-10">
+    <div>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/2024px-Burger_King_logo_%281999%29.svg.png"
+        alt=""
+        class="mt-10"
+      />
+    </div>
+    <div>
+      <img
+        src="https://capitalcentre.co.ke/wp-content/uploads/2021/02/Pizza-logo.jpg"
+        alt=""
+        class="mt-10"
+      />
+    </div>
+    <div>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/2024px-Burger_King_logo_%281999%29.svg.png"
+        alt=""
+        class="mt-10"
+      />
+    </div>
+    <div>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/2024px-Burger_King_logo_%281999%29.svg.png"
+        alt=""
+        class="mt-10"
+      />
+    </div>
+    <div>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/2024px-Burger_King_logo_%281999%29.svg.png"
+        alt=""
+        class="mt-10"
+      />
+    </div>
+  </div>
+  <h1 class="font-barlow text-5xl capitalize text-[#ff5634] mt-20">
+    Choose from the most popular restaurants
+  </h1>
+  <p class="font-gilda text-gray-400 mt-5">
+    Explore restaurants, bars, and cafés by locality
+  </p>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full"
+  >
+    <div class="relative mx-auto w-full">
+      <a
+        href="#"
+        class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full"
+      >
+        <div class="shadow p-4 rounded-lg bg-white">
+          <div
+            class="flex justify-center relative rounded-lg overflow-hidden h-52"
+          >
+            <div
+              class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full"
+            >
+              <div class="">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/2024px-Burger_King_logo_%281999%29.svg.png"
+                  alt=""
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <div class="absolute flex justify-center bottom-0 mb-3"></div>
+
+            <span
+              class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-green-500 text-sm font-medium text-white select-none"
+            >
+              Open
+            </span>
+          </div>
+
+          <div class="mt-4">
+            <h2
+              class="font-medium text-base md:text-lg text-gray-800 line-clamp-1"
+              title="New York"
+            >
+              Burger King
+            </h2>
+            <p
+              class="mt-2 text-sm text-gray-800 line-clamp-1"
+              title="New York, NY 10004, United States"
+            >
+              Thika
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="relative mx-auto w-full">
+      <a
+        href="#"
+        class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full"
+      >
+        <div class="shadow p-4 rounded-lg bg-white">
+          <div
+            class="flex justify-center relative rounded-lg overflow-hidden h-52"
+          >
+            <div
+              class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full"
+            >
+              <div class="">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/2024px-Burger_King_logo_%281999%29.svg.png"
+                  alt=""
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <div class="absolute flex justify-center bottom-0 mb-3"></div>
+            <span
+              class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-green-500 text-sm font-medium text-white select-none"
+            >
+              Open
+            </span>
+          </div>
+
+          <div class="mt-4">
+            <h2
+              class="font-medium text-base md:text-lg text-gray-800 line-clamp-1"
+              title="New York"
+            >
+              Burger King
+            </h2>
+            <p
+              class="mt-2 text-sm text-gray-800 line-clamp-1"
+              title="New York, NY 10004, United States"
+            >
+              Thika
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="relative mx-auto w-full">
+      <a
+        href="#"
+        class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full"
+      >
+        <div class="shadow p-4 rounded-lg bg-white">
+          <div
+            class="flex justify-center relative rounded-lg overflow-hidden h-52"
+          >
+            <div
+              class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full"
+            >
+              <div class="">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/2024px-Burger_King_logo_%281999%29.svg.png"
+                  alt=""
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <div class="absolute flex justify-center bottom-0 mb-3"></div>
+
+            <span
+              class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none"
+            >
+              Closed
+            </span>
+          </div>
+
+          <div class="mt-4">
+            <h2
+              class="font-medium text-base md:text-lg text-gray-800 line-clamp-1"
+              title="New York"
+            >
+              Burger King
+            </h2>
+            <p
+              class="mt-2 text-sm text-gray-800 line-clamp-1"
+              title="New York, NY 10004, United States"
+            >
+              Thika
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="relative mx-auto w-full">
+      <a
+        href="#"
+        class="relative inline-block duration-300 ease-in-out transition-transform transform hover:-translate-y-2 w-full"
+      >
+        <div class="shadow p-4 rounded-lg bg-white">
+          <div
+            class="flex justify-center relative rounded-lg overflow-hidden h-52"
+          >
+            <div
+              class="transition-transform duration-500 transform ease-in-out hover:scale-110 w-full"
+            >
+              <div class="">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Burger_King_logo_%281999%29.svg/2024px-Burger_King_logo_%281999%29.svg.png"
+                  alt=""
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <div class="absolute flex justify-center bottom-0 mb-3"></div>
+
+            <span
+              class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-green-500 text-sm font-medium text-white select-none"
+            >
+              Open
+            </span>
+          </div>
+
+          <div class="mt-4">
+            <h2
+              class="font-medium text-base md:text-lg text-gray-800 line-clamp-1"
+              title="New York"
+            >
+              Burger King
+            </h2>
+            <p
+              class="mt-2 text-sm text-gray-800 line-clamp-1"
+              title="New York, NY 10004, United States"
+            >
+              Thika
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

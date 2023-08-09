@@ -1,6 +1,6 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <div class="hero-bg">
-  <div class="w-[50%]">
+  <div class="md:w-[50%] w-[80%]">
     <h2 class="font-barlow text-center text-2xl text-[#ff5634]">
       FOOD DELIVERY SERVICE
     </h2>
@@ -13,23 +13,23 @@
       quos doloribus quod quas? Quisquam voluptatibus, voluptatem, quibusdam,
       quia voluptates voluptatum voluptate quos doloribus quod quas?
     </p>
-    <div class="flex items-center gap-5 mt-10">
+    <div class="flex flex-col md:flex-row items-center gap-5 mt-10">
       <input
         type="text"
-        class="w-[50%] h-10 rounded-md px-5 outline-none"
+        class="md:w-[50%] h-10 rounded-md px-7 outline-none"
         placeholder="Search for food"
       />
-      <div class="bg-[#fff] rounded-md items-center h-10 w-72 px-5">
+      <div class="bg-[#fff] rounded-md items-center h-10 md:w-72 px-5">
         <i class="fa-solid fa-location-dot"></i>
         <input
           type="text"
-          class="w-[80%] rounded-md mt-2 outline-none"
+          class="md:w-[80%] rounded-md mt-2 outline-none"
           placeholder="All locations"
         />
       </div>
       <input
         type="text"
-        class="w-[50%] h-10 rounded-md px-5 outline-none"
+        class="md:w-[50%] h-10 rounded-md px-7 outline-none"
         placeholder="Choose radius"
       />
       <button class="bg-[#ff5634] text-white rounded-md px-5 py-2">
@@ -90,7 +90,7 @@
     Explore restaurants, bars, and cafés by locality
   </p>
   <div
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10 w-full"
   >
     <div class="relative mx-auto w-full">
       <a

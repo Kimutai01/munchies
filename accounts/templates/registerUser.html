@@ -8,6 +8,7 @@
     >
       User signup
     </h1>
+    {% include 'alerts.html' %}
 
     <form action="{% url 'register-user' %}" method="POST">
       {% csrf_token %}

@@ -3,7 +3,8 @@ from django.dispatch import receiver
 from .models import User, Profile
 
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+def post_save_create_profile_receiver(sender, instance, created, **kwargs):
+    print(created)
     if created:
         Profile.objects.create(user=instance)
         print("Profile created!")
@@ -16,7 +17,3 @@ def create_user_profile(sender, instance, created, **kwargs):
             Profile.objects.create(user=instance)
             print("Profile created!")
          
-@receiver(pre_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
-    print("Profile saved!") 

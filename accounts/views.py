@@ -15,6 +15,9 @@ def registerUser(request):
             user.set_password(password)
             user.save()
             return redirect('register-user')
+        else:
+            print('Form is not valid')
+            print(form.errors)
     else:
         form = UserForm()
     

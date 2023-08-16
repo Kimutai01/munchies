@@ -79,6 +79,13 @@
           placeholder="Confirm your password"
         />
       </div>
+      <ul class="mb-4">
+        {% for field in form %} {% if field.errors %} {% for error in field.errors %}
+        <li class="text-red-500 text-sm">{{ error }}</li>
+        {% endfor %} {% endif %} {% endfor %}
+        <li class="text-red-500 text-sm">{{form.non_field_errors}}</li>
+      </ul>
+
       <input
         type="submit"
         class="w-full px-4 py-2 bg-[#e3af5a] text-white hover:text-[#000] rounded-md hover:bg-[#fff]"

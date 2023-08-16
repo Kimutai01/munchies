@@ -46,10 +46,20 @@
         >
           <a href="">Agents</a>
         </li>
-        <li
-          class="ml-10 font-medium text-[#eee] uppercase text-sm hover:text-[#cda873] hover:scale-105 transition-all duration-all hover:border-y-black"
-        >
-          <a href="{% url 'register-user' %}">Login/Register</a>
+        <li class="ml-10 font-medium text-[#eee] uppercase text-sm">
+          <a>
+            <span
+              class="px-2 py-1 hover:text-[#cda873] hover:scale-105 transition-all duration-all rounded-md font-medium"
+            >
+              <a href="{% url 'register-user' %}">Register </a>
+            </span>
+
+            <span
+              class="px-2 py-1 hover:text-[#cda873] hover:scale-105 transition-all duration-all rounded-md text-[#fff] font-medium"
+            >
+              <a href="">Login</a>
+            </span>
+          </a>
         </li>
       </ul>
       <div

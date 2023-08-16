@@ -1,8 +1,13 @@
-{% if messages %} {% for message in messages %}
+{% load static %} {% if messages %} {% for message in messages %} {% comment %}
+blue bg if message.tags == 'info' green bg if message.tags == 'success' yellow
+bg if message.tags == 'warning' red bg if message.tags == 'error' rounded-lg
+px-4 py-2 shadow-lg my-2 {% endcomment %}
 <div
-  class="bg-green-200 flex items-center justify-between text-sm py-2 px-4 border border-green-400 rounded mb-4"
+  class="{{message.tags}} flex items-center justify-between text-sm py-2 px-4 border border-green-400 rounded mb-4 show-notifcation"
 >
-  <p>{{ message }}</p>
+  <p>
+    <strong class="font-bold">{{ message }}</strong>
+  </p>
   <button onclick="this.parentElement.style.display='none'">
     <svg
       class="fill-current h-6 w-6 text-green-500"

@@ -147,3 +147,13 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'bg-red-200',
+    messages.SUCCESS: 'bg-green-200',
+    messages.WARNING: 'bg-yellow-200',
+    messages.INFO: 'bg-blue-200',
+    
+}

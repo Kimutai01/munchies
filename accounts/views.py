@@ -9,6 +9,7 @@ from .utils import send_verification_email, detect_user
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.utils.http import urlsafe_base64_decode
+from vendor.models import Vendor
 
 # Create your views here.
 
@@ -130,7 +131,11 @@ def customerDashboard(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_clinic)
 def clinicDashboard(request):
-    return render(request, 'clinicDashboard.html')
+    clinic = Vendor.objects.get(user=request.user)
+    context = {
+        'clinic': clinic
+    }
+    return render(request, 'clinicDashboard.html', context)
 
 def activate(request, uidb64, token):
     try:

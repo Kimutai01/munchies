@@ -146,3 +146,12 @@ def activate(request, uidb64, token):
         messages.error(request, 'Activation link is invalid')
         return redirect('myAccount')
     
+def forgot_password(request):
+    return render(request, 'forgot_password.html')
+
+def reset_password_validate(request, uidb64, token):
+    return 
+
+def reset_password(request):
+    return render(request, 'reset_password.html')
+    

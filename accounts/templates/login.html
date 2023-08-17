@@ -35,6 +35,14 @@
         />
       </form>
       <p class="text-center mt-4 text-white">
+        Forgot your password? -
+        <a
+          href="{% url 'forgot_password' %}"
+          class="text-blue-500 hover:underline"
+          >Reset Password</a
+        >
+      </p>
+      <p class="text-center mt-4 text-white">
         Not yet registered! -
         <a
           href="{% url 'register-vendor' %}"

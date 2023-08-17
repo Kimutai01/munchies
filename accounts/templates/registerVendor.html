@@ -1,0 +1,129 @@
+<!-- Tenant Signup Form -->
+{% extends 'main.html' %} {% block content %}
+<div class="flex justify-center h-screen bg-[#161616] pt-20 items-center">
+  <div class="max-w-md w-full px-6 py-4 bg-[#161616] rounded-lg shadow-md">
+    <h1
+      class="text-2xl font-bold mb-4 text-white text-center uppercase font-bold"
+      style="font-family: 'Gilda Display', serif"
+    >
+      Register Your Vetinary Clinic
+    </h1>
+    {% include 'alerts.html' %}
+
+    <form action="{% url 'register-vendor' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="flex justify-between">
+      <div class="mb-4">
+        <label
+          for="{{ form.first_name.id_for_label }}"
+          class="block text-sm font-medium text-white uppercase"
+        >
+          First Name:
+        </label>
+        {{ form.first_name }}
+      </div>
+      <div class="mb-4">
+        <label
+          for="{{ form.last_name.id_for_label }}"
+          class="block text-sm font-medium text-white uppercase"
+        >
+          Last Name:
+        </label>
+        {{ form.last_name }}
+      </div>
+      </div>
+
+      <div class="flex justify-between">
+      <div class="mb-4">
+        <label
+          for="{{ form.last_name.id_for_label }}"
+          class="block text-sm font-medium text-white uppercase"
+        >
+          Vetinary Clinic Name:
+        </label>
+        {{ vendorForm.vendor_name }}
+      </div>
+      <div class="mb-4">
+        <label
+          for="{{ form.last_name.id_for_label }}"
+          class="block text-sm font-medium text-white uppercase"
+        >
+          Vetinary License:
+        </label>
+        {{ vendorForm.vendor_license }}
+      </div>
+      </div>
+
+      <div class="flex justify-between">
+      <div class="mb-4">
+        <label
+          for="{{ form.email.id_for_label }}"
+          class="block text-sm font-medium text-white uppercase"
+        >
+          Email:
+        </label>
+        {{ form.email }}
+      </div>
+      <div class="mb-4">
+        <label
+          for="{{ form.username.id_for_label }}"
+          class="block text-sm font-medium text-white uppercase"
+        >
+          Username:
+        </label>
+        {{ form.username }}
+      </div>
+      </div>
+
+      <div class="flex gap-4">
+      <div class="mb-4">
+        <label
+          for="{{ form.password1.id_for_label }}"
+          class="block text-sm font-medium text-white uppercase"
+        >
+          Password:
+        </label>
+        <input
+          type="password"
+          id="{{ form.password.id_for_label }}"
+          name="{{ form.password.name }}"
+          class="w-full px-3 py-2 border border-gray-300 rounded placeholder-gray-500 focus:outline-none focus:ring focus:border-blue-500"
+          placeholder="Enter your password"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          for="{{ form.confirm_password.id_for_label }}"
+          class="block text-sm font-medium text-white uppercase"
+        >
+          Confirm Password:
+        </label>
+        <input
+          type="password"
+          id="{{ form.password2.id_for_label }}"
+          name="{{ form.confirm_password.name }}"
+          class="w-full px-3 py-2 border border-gray-300 rounded placeholder-gray-500 focus:outline-none focus:ring focus:border-blue-500"
+          placeholder="Confirm your password"
+        />
+      </div>
+      </div>
+      <ul class="mb-4">
+        {% for field in form %} {% if field.errors %} {% for error in field.errors %}
+        <li class="text-red-500 text-sm">{{ error }}</li>
+        {% endfor %} {% endif %} {% endfor %}
+        <li class="text-red-500 text-sm">{{form.non_field_errors}}</li>
+      </ul>
+
+      <input
+        type="submit"
+        class="w-full px-4 py-2 bg-[#e3af5a] text-white hover:text-[#000] rounded-md hover:bg-[#fff]"
+        value="Signup"
+      />
+    </form>
+    <p class="mt-4 text-[#fff] font-medium">
+      Already registered!
+      <a href="" class="text-[#e3af5a] hover:underline">Login Now</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

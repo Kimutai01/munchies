@@ -16,11 +16,11 @@ def detect_user(user):
         redirect_url = '/admin'
     return redirect_url
 
-def send_verification_email(request, user):
+def send_verification_email(request, user,subject, template):
     from_email = settings.DEFAULT_FROM_EMAIL
     current_site = get_current_site(request)
-    subject = 'Please activate your account'
-    message = render_to_string('activate_account.html', {
+    subject = subject
+    message = render_to_string(template, {
         'user': user,
         'domain': current_site.domain,
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -29,3 +29,17 @@ def send_verification_email(request, user):
     to_email = user.email
     mail = EmailMessage(subject, message, from_email, to=[to_email])
     mail.send()
+    
+# def send_reset_password_email(request,user):
+#     from_email = settings.DEFAULT_FROM_EMAIL
+#     current_site = get_current_site(request)
+#     subject = 'Reset your password'
+#     message = render_to_string('reset_password_email.html', {
+#         'user': user,
+#         'domain': current_site.domain,
+#         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+#         'token': default_token_generator.make_token(user),
+#     })
+#     to_email = user.email
+#     mail = EmailMessage(subject, message, from_email, to=[to_email])
+#     mail.send()

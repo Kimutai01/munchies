@@ -2,11 +2,14 @@ from django.shortcuts import render, HttpResponse, redirect
 from .forms import UserForm
 from django.contrib import messages
 from vendor.forms import VendorForm
-from .models import Profile
+from .models import *
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib import auth
-from .utils import detectUser
+from .utils import send_verification_email, detect_user
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
+from django.utils.http import urlsafe_base64_decode
+
 # Create your views here.
 
 def check_role_clinic(user):
@@ -34,6 +37,9 @@ def registerUser(request):
             user.role = user.CUSTOMER
             user.set_password(password)
             user.save()
+            
+            # send verification email
+            send_verification_email(request,user)
             messages.success(request, 'Your account has been created successfully')
             return redirect('register-user')
         else:
@@ -65,6 +71,7 @@ def registerVendor(request):
             profile = Profile.objects.get(user=user)
             vendor.profile = profile
             vendor.save()
+            send_verification_email(request,user)
             messages.success(request, 'Your account has been created successfully, please wait for the approval')
             return redirect('register-vendor')
         else:
@@ -110,7 +117,7 @@ def logout(request):
 @login_required(login_url='login')
 def myAccount(request):
     user = request.user
-    redirect_url = detectUser(user)
+    redirect_url = detect_user(user)
     return redirect(redirect_url)
 @login_required(login_url='login')
 @user_passes_test(check_role_customer)
@@ -122,3 +129,20 @@ def customerDashboard(request):
 @user_passes_test(check_role_clinic)
 def clinicDashboard(request):
     return render(request, 'clinicDashboard.html')
+
+def activate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+        
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.success(request, 'Your account has been verified successfully')
+        return redirect('myAccount')
+    else:
+        messages.error(request, 'Activation link is invalid')
+        return redirect('myAccount')
+    

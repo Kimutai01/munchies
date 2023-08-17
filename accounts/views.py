@@ -3,12 +3,30 @@ from .forms import UserForm
 from django.contrib import messages
 from vendor.forms import VendorForm
 from .models import Profile
+from django.contrib import auth
+from .utils import detectUser
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.exceptions import PermissionDenied
 # Create your views here.
 
-def registerUser(request):
-    form = UserForm()
+def check_role_clinic(user):
+    if user.role == 1:
+        return True
+    else:
+        raise PermissionDenied
     
-    if request.method == 'POST':
+def check_role_customer(user):
+    if user.role == 2:
+        return True
+    else:
+        raise PermissionDenied
+
+def registerUser(request):
+    if request.user.is_authenticated:
+        messages.warning(request, 'You are already logged in')
+        return redirect('dashboard')
+    
+    elif request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
             password = form.cleaned_data['password']
@@ -62,3 +80,45 @@ def registerVendor(request):
         
     }
     return render(request, 'registerVendor.html', context)
+
+def login(request):
+    if request.user.is_authenticated:
+        messages.warning(request, 'You are already logged in')
+        return redirect('myAccount')
+    
+    elif request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        
+        user = auth.authenticate(email=email, password=password)
+        
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request, 'You are now logged in')
+            return redirect('myAccount')
+        else:
+            messages.error(request, 'Invalid login credentials')
+            return redirect('login')
+    return render(request, 'login.html')
+
+def logout(request):
+    auth.logout(request)
+    messages.info(request, 'You are now logged out')
+    return redirect('login')
+
+
+@login_required(login_url='login')
+def myAccount(request):
+    user = request.user
+    redirect_url = detectUser(user)
+    return redirect(redirect_url)
+@login_required(login_url='login')
+@user_passes_test(check_role_customer)
+def customerDashboard(request):
+    return render(request, 'customerDashboard.html')
+
+
+@login_required(login_url='login')
+@user_passes_test(check_role_clinic)
+def clinicDashboard(request):
+    return render(request, 'clinicDashboard.html')

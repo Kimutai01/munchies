@@ -1,0 +1,5 @@
+{% extends 'main.html' %} {% block content %}
+<h1>customer Dashboards</h1>
+<h1>Welcome {{user.username}}</h1>
+<p>{{user.get_role}}</p>
+{% include 'alerts.html' %} {% endblock %}

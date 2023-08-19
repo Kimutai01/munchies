@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'accounts.context_processors.get_google_api'
             ],
         },
     },
@@ -168,3 +169,5 @@ EMAIL_PORT = config("EMAIL_PORT", cast=int)
 EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
 EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool)
 DEFAULT_FROM_EMAIL = 'vetinary services around you <kiprotichkimutai01@gmail.com>'
+
+GOOGLE_API_KEY = 'AIzaSyCofEHIsoFbtmxqUvDMQgbHTRIfJ1yrARI'

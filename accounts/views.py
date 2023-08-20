@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.utils.http import urlsafe_base64_decode
 from vendor.models import Vendor
+from vendor.models import OpeningHour, Appointment
 
 # Create your views here.
 
@@ -40,7 +41,9 @@ def registerUser(request):
             user.save()
             
             # send verification email
-            send_verification_email(request,user)
+            subject = 'Please activate your account'
+            template = 'activate_account.html'
+            send_verification_email(request,user,subject,template)
             messages.success(request, 'Your account has been created successfully')
             return redirect('register-user')
         else:
@@ -125,7 +128,13 @@ def myAccount(request):
 @login_required(login_url='login')
 @user_passes_test(check_role_customer)
 def customerDashboard(request):
-    return render(request, 'customerDashboard.html')
+    appointments = Appointment.objects.filter(user=request.user)
+    print(appointments)
+    
+    context = {
+        'appointments': appointments
+    }
+    return render(request, 'customerDashboard.html', context)
 
 
 @login_required(login_url='login')

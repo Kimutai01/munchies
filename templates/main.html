@@ -27,16 +27,24 @@
       rel="stylesheet"
       type="text/css"
     />
+    <link
+      type="text/css"
+      href="@@path/vendor/sweetalert2/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
+    {% if '/' == request.path or 'profile' in request.path %}
     <script
       src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_API_KEY}}&libraries=places&callback=initAutoComplete"
       defer
     ></script>
+    {% endif %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+    <script src="@@path/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
 
     <title>Munchies</title>
   </head>

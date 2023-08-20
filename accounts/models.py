@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from twilio.rest import Client
 
 
 # Create your models here.
@@ -104,8 +105,26 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.email
     
+    
     # def full_address(self):
     #     return f'{self.address_line_1} {self.address_line_2}'
+    
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     # send text message
+    #     account_sid = ''
+    #     auth_token = ''
+    #     client = Client(account_sid, auth_token)
+        
+    #     message = client.messages.create(
+    #         body='Your profile has been created successfully',
+    #         from_='+13345083906',
+    #         to='+254790841979'
+    #     )
+    
+    #     print(message.sid)
+        
+    #     return super().save(*args, **kwargs)
     
 
 

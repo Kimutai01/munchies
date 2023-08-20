@@ -69,3 +69,65 @@ function onPlaceChanged() {
     }
   }
 }
+
+$(document).ready(function () {
+  $(".add_hour").click(function (e) {
+    e.preventDefault();
+    let day = $("#id_day").val();
+    let from_hour = $("#id_from_hour").val();
+    let to_hour = $("#id_to_hour").val();
+    let is_closed = $("#id_is_closed").is(":checked");
+    let csrf_token = $("input[name=csrfmiddlewaretoken]").val();
+    let url = document.getElementById("add_hour_url").value;
+    console.log(day, from_hour, to_hour, is_closed, csrf_token);
+
+    if (is_closed) {
+      is_closed = true;
+      condition = "day !=''";
+    } else {
+      is_closed = false;
+      condition = "day !='' && from_hour !='' && to_hour !=''";
+    }
+    if (eval(condition)) {
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: {
+          day: day,
+          from_hour: from_hour,
+          to_hour: to_hour,
+          is_closed: is_closed,
+          csrfmiddlewaretoken: csrf_token,
+        },
+        success: function (response) {
+          if (response.status == "success") {
+            //   <tr>
+            //   <td class="border px-4 py-2">{{ hour.get_day_display }}</td>
+            //   <td class="border px-4 py-2">{{ hour.from_hour }}</td>
+            //   <td class="border px-4 py-2">{{ hour.to_hour }}</td>
+            //   <td class="border px-4 py-2">Delete</td>
+            // </tr>
+            let html = `<tr>
+            <td class="border px-4 py-2">${response.day}</td>
+            <td class="border px-4 py-2">${response.from_hour}</td>
+            <td class="border px-4 py-2">${response.to_hour}</td>
+            <td class="border px-4 py-2">Delete</td>
+          </tr>`;
+            $(".hours_table").append(html);
+            $("#id_day").val("");
+            $("#id_from_hour").val("");
+            $("#id_to_hour").val("");
+            $("#id_is_closed").prop("checked", false);
+            // reload the page
+            location.reload();
+          }
+        },
+        error: function (response) {
+          console.log(response);
+        },
+      });
+    } else {
+      alert("Please fill in all the fields");
+    }
+  });
+});

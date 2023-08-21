@@ -11,6 +11,7 @@ urlpatterns = [
     
     path('opening-hours/add/', views.add_opening_hours, name='add-opening-hour'),
     # path('opening-hours/<int:pk>/delete/', views.delete_opening_hour, name='delete-opening-hour'),
+    path('delete-opening-hour/<int:pk>/', views.delete_opening_hours, name='delete-opening-hour'),
     path('appointments/<int:pk>/', views.appointment_booking, name='appointments_booking'),
     path('edit-appointment/<int:pk>/', views.edit_appointment, name='edit-appointment'),
     path('delete-appointment/<int:pk>/', views.cancel_appointment, name='delete-appointment'),

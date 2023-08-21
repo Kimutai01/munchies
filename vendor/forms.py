@@ -12,6 +12,7 @@ class VendorForm(forms.ModelForm):
         }
         
 class OpeningHourForm(forms.ModelForm):
+    is_closed = forms.BooleanField(required=False)
     class Meta:
         model = OpeningHour
         fields = ['day', 'from_hour', 'to_hour', 'is_closed']

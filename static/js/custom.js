@@ -73,19 +73,20 @@ function onPlaceChanged() {
 $(document).ready(function () {
   $(".add_hour").click(function (e) {
     e.preventDefault();
+
     let day = $("#id_day").val();
-    let from_hour = $("#id_from_hour").val();
-    let to_hour = $("#id_to_hour").val();
+    let from_hour = $("#id_from_hour").val() || null;
+    let to_hour = $("#id_to_hour").val() || null;
     let is_closed = $("#id_is_closed").is(":checked");
     let csrf_token = $("input[name=csrfmiddlewaretoken]").val();
     let url = document.getElementById("add_hour_url").value;
     console.log(day, from_hour, to_hour, is_closed, csrf_token);
 
     if (is_closed) {
-      is_closed = true;
+      is_closed = "True";
       condition = "day !=''";
     } else {
-      is_closed = false;
+      is_closed = "False";
       condition = "day !='' && from_hour !='' && to_hour !=''";
     }
     if (eval(condition)) {
@@ -100,26 +101,36 @@ $(document).ready(function () {
           csrfmiddlewaretoken: csrf_token,
         },
         success: function (response) {
+          let html;
           if (response.status == "success") {
-            //   <tr>
-            //   <td class="border px-4 py-2">{{ hour.get_day_display }}</td>
-            //   <td class="border px-4 py-2">{{ hour.from_hour }}</td>
-            //   <td class="border px-4 py-2">{{ hour.to_hour }}</td>
-            //   <td class="border px-4 py-2">Delete</td>
-            // </tr>
-            let html = `<tr>
-            <td class="border px-4 py-2">${response.day}</td>
-            <td class="border px-4 py-2">${response.from_hour}</td>
-            <td class="border px-4 py-2">${response.to_hour}</td>
-            <td class="border px-4 py-2">Delete</td>
-          </tr>`;
+            if (response.is_closed === "Closed") {
+              html =
+                "<tr><td class='border px-4 py-2'>" +
+                response.day +
+                "</td><td class='border px-4 py-2'>" +
+                response.is_closed +
+                "</td><td class='border px-4 py-2'>" +
+                response.is_closed +
+                "</td><td class='border px-4 py-2'>Delete</td></tr>";
+            } else {
+              html =
+                "<tr><td class='border px-4 py-2'>" +
+                response.day +
+                "</td><td class='border px-4 py-2'>" +
+                response.from_hour +
+                "</td><td class='border px-4 py-2'>" +
+                response.to_hour +
+                "</td><td class='border px-4 py-2'>Delete</td></tr>";
+            }
+
             $(".hours_table").append(html);
             $("#id_day").val("");
             $("#id_from_hour").val("");
             $("#id_to_hour").val("");
             $("#id_is_closed").prop("checked", false);
-            // reload the page
-            location.reload();
+            swal("Success!", "Hours added successfully", "success");
+          } else {
+            swal("Error!", "Please fill all the fields", "error");
           }
         },
         error: function (response) {
@@ -127,7 +138,9 @@ $(document).ready(function () {
         },
       });
     } else {
-      alert("Please fill in all the fields");
+      swal("Error!", "Please fill all the fields", "error");
     }
+   
+    
   });
 });

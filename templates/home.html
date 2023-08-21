@@ -84,12 +84,19 @@
             </div>
 
             <div class="absolute flex justify-center bottom-0 mb-3"></div>
-
+            {% if clinic.profile.is_open %}
             <span
               class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-green-500 text-sm font-medium text-white select-none"
             >
               Open
             </span>
+            {% else %}
+            <span
+              class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none"
+            >
+              Closed
+            </span>
+            {% endif %}
           </div>
 
           <div class="mt-4">

@@ -14,6 +14,7 @@
             <th class="px-4 py-2">Day</th>
             <th class="px-4 py-2">From Hour</th>
             <th class="px-4 py-2">To Hour</th>
+            <th class="px-4 py-2">Status</th>
             <th class="px-4 py-2">Delete</th>
           </tr>
         </thead>
@@ -21,9 +22,27 @@
           {% for hour in opening_hours %}
           <tr>
             <td class="border px-4 py-2">{{ hour.get_day_display }}</td>
-            <td class="border px-4 py-2">{{ hour.from_hour }}</td>
-            <td class="border px-4 py-2">{{ hour.to_hour }}</td>
-            <td class="border px-4 py-2">Delete</td>
+            <td class="border px-4 py-2">
+              {% if hour.is_closed %} Closed {% else %} {{ hour.from_hour }} {% endif %}
+            </td>
+            <td class="border px-4 py-2">
+              {% if hour.is_closed %} Closed {% else %} {{ hour.to_hour }} {% endif %}
+            </td>
+
+            <td class="border px-4 py-2">
+              <form
+                action="{% url 'delete-opening-hour' hour.id %}"
+                method="POST"
+              >
+                {% csrf_token %}
+                <button
+                  class="px-4 py-2 font-bold text-red-500 rounded hover:text-red-700"
+                  type="submit"
+                >
+                  Delete
+                </button>
+              </form>
+            </td>
           </tr>
 
           {% endfor %}
@@ -38,7 +57,7 @@
       </h1>
       <form>
         {% csrf_token %}
-        <div class="flex gap-5">
+        <div class="flex gap-5" id="add_hour_form">
           <div>
             <label
               class="text-white dark:text-gray-200"
@@ -84,6 +103,7 @@
           />
           <button
             class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600 add_hour"
+            type="submit"
           >
             Save
           </button>

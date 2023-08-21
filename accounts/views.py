@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .forms import UserForm
+from .forms import UserForm, ProfileForm
 from django.contrib import messages
 from vendor.forms import VendorForm
 from .models import *
@@ -11,6 +11,8 @@ from django.core.exceptions import PermissionDenied
 from django.utils.http import urlsafe_base64_decode
 from vendor.models import Vendor
 from vendor.models import OpeningHour, Appointment
+from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
 
@@ -141,8 +143,10 @@ def customerDashboard(request):
 @user_passes_test(check_role_clinic)
 def clinicDashboard(request):
     clinic = Vendor.objects.get(user=request.user)
+    bookings = Appointment.objects.filter(vendor=clinic)
     context = {
-        'clinic': clinic
+        'clinic': clinic,
+        'bookings': bookings
     }
     return render(request, 'clinicDashboard.html', context)
 
@@ -214,4 +218,32 @@ def reset_password(request):
             messages.error(request, 'Passwords do not match')
             return redirect('reset_password')
     return render(request, 'reset_password.html')
+
+def edit_customer_profile(request):
+    profile = get_object_or_404(Profile, user=request.user)
+    customer = User.objects.get(pk=request.user.id)
+    profile_form = ProfileForm(instance=profile)
+    customer_form = UserForm(instance=customer)
+    
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
+        customer_form = UserForm(request.POST, instance=customer)
+        
+        if profile_form.is_valid() and customer_form.is_valid():
+            profile_form.save()
+            customer_form.save()
+            messages.success(request, 'Your profile has been updated')
+            return redirect('edit_customer_profile')
+        else:
+            messages.error(request, 'Please correct the error below')
+    else:
+        profile_form = ProfileForm(instance=profile)
+        customer_form = UserForm(instance=customer)
+        
+    context = {
+        'profile_form': profile_form,
+        'customer_form': customer_form,
+    }
+    
+    return render(request, 'customerProfile.html', context)
     

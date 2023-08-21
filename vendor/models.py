@@ -2,6 +2,8 @@ from django.db import models
 from accounts.models import User, Profile
 from accounts.utils import send_notification
 from datetime import time
+from datetime import datetime
+from datetime import date
 
 # Create your models here.
 
@@ -17,6 +19,28 @@ class Vendor(models.Model):
     
     def __str__(self):
         return self.vendor_name
+    
+    def is_open(self):
+        # Check current day's opening hours.
+        today_date = date.today()
+        today = today_date.isoweekday()
+        
+        current_opening_hours = OpeningHour.objects.filter(vendor=self, day=today)
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+
+        is_open = None
+        for i in current_opening_hours:
+            if not i.is_closed:
+                start = str(datetime.strptime(i.from_hour, "%I:%M %p").time())
+                end = str(datetime.strptime(i.to_hour, "%I:%M %p").time())
+                if current_time > start and current_time < end:
+                    is_open = True
+                    break
+                else:
+                    is_open = False
+        return is_open
+
     
     def save(self, *args, **kwargs):
         if self.pk is not None:
@@ -38,6 +62,8 @@ class Vendor(models.Model):
                     send_notification(subject,template,context)
                 
         return super(Vendor, self).save(*args, **kwargs)
+  
+       
     
 
 
@@ -59,8 +85,8 @@ HOUR_OF_DAY_24 = [
 class OpeningHour(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     day = models.PositiveSmallIntegerField(choices=DAYS)
-    from_hour = models.TimeField(choices=HOUR_OF_DAY_24, null=True, blank=True)
-    to_hour = models.TimeField(choices=HOUR_OF_DAY_24, null=True, blank=True)
+    from_hour = models.CharField(choices=HOUR_OF_DAY_24, null=True, blank=True)
+    to_hour = models.CharField(choices=HOUR_OF_DAY_24, null=True, blank=True)
     is_closed = models.BooleanField(default=False)
     
     created_at = models.DateTimeField(auto_now_add=True)

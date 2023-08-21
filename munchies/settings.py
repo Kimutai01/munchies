@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'accounts',
     'vendor',
+    'sweetify',
 ]
 
 MIDDLEWARE = [

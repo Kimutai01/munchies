@@ -119,6 +119,20 @@ class Appointment(models.Model):
         
     def __str__(self):
         return self.user.first_name + ' - ' + str(self.date) + ' ' + str(self.time)
+    
+
+class DoctorNote(models.Model):
+    appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE)
+    note = models.TextField()
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['created_at']
+        
+    def __str__(self):
+        return self.note
 
     
     

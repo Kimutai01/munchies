@@ -1,20 +1,19 @@
-{% extends 'main.html' %} {% load static %} {% block content %} {% include
-'alerts.html' %}
+{% extends 'main.html' %} {% load static %} {% block content %} {% include 'alerts.html' %}
 
 <div class="flex h-screen bg-gray-800">
   <!-- Sidebar -->
 
   {% include 'clinic_sidebar.html' %}
-  <div>
-    <h2 class="text-white">Opening hours</h2>
-    <div class="overflow-x-auto">
+  <div class='mx-28'>
+    <h2 class="text-white text-center pt-20 text-4xl font-extrabold uppercase">Opening hours</h2>
+    <div class="overflow-x-auto mt-10">
       <table class="min-w-full text-[#fff] hours_table">
         <thead>
           <tr>
             <th class="px-4 py-2">Day</th>
             <th class="px-4 py-2">From Hour</th>
             <th class="px-4 py-2">To Hour</th>
-            <th class="px-4 py-2">Status</th>
+      
             <th class="px-4 py-2">Delete</th>
           </tr>
         </thead>
@@ -50,12 +49,12 @@
       </table>
     </div>
     <section
-      class="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800"
+      class="max-w-4xl p-6 pt-10 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800"
     >
-      <h1 class="text-xl font-bold text-white capitalize dark:text-white">
-        Add new opening hour
+      <h1 class="text-xl text-center font-bold text-white capitalize dark:text-white">
+        Add opening hour
       </h1>
-      <form>
+      <form class='pt-10'>
         {% csrf_token %}
         <div class="flex gap-5" id="add_hour_form">
           <div>
@@ -84,7 +83,7 @@
             {{form.to_hour}}
           </div>
 
-          <div>
+          <div class='mt-10'>
             <label
               class="text-white dark:text-gray-200"
               for="passwordConfirmation"
@@ -102,7 +101,7 @@
             id="add_hour_url"
           />
           <button
-            class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600 add_hour"
+            class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-gray-600 add_hour"
             type="submit"
           >
             Save

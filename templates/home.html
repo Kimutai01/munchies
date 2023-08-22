@@ -5,7 +5,7 @@
       Find vetinary clinics around you
     </h2>
     <h1 class="font-barlow text-center text-5xl text-white">
-      Delicious food at your fingertips
+      Is your pet sick? Find a clinic near you
     </h1>
     <p class="text-gray-400 font-gilda text-center mt-5">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
@@ -13,50 +13,12 @@
       quos doloribus quod quas? Quisquam voluptatibus, voluptatem, quibusdam,
       quia voluptates voluptatum voluptate quos doloribus quod quas?
     </p>
-    <div class="flex flex-col md:flex-row items-center gap-5 mt-10">
-      <input
-        type="text"
-        class="md:w-[50%] h-10 rounded-md px-7 outline-none"
-        placeholder="Search for food"
-      />
-      <div class="bg-[#fff] rounded-md items-center h-10 md:w-72 px-5">
-        <i class="fa-solid fa-location-dot"></i>
-        <input
-          type="text"
-          class="md:w-[80%] rounded-md mt-2 outline-none"
-          placeholder="All locations"
-        />
-      </div>
-      <input
-        type="text"
-        class="md:w-[50%] h-10 rounded-md px-7 outline-none"
-        placeholder="Choose radius"
-      />
-      <button class="bg-[#ff5634] text-white rounded-md px-5 py-2">
-        Search
-      </button>
-    </div>
   </div>
 </div>
 
 <div class="w-[90%] mx-auto mt-20">
-  <h1 class="font-barlow text-5xl capitalize text-[#ff5634]">Top clinics</h1>
-  <p class="font-gilda text-gray-400 mt-5">
-    Explore vetinary clinics around you
-  </p>
-  <div class="grid grid-cols-2 md:grid-cols-5 gap-5 items-center mt-10">
-    <div>
-      {% for clinic in clinics %}
-      <img
-        src="{{ clinic.profile.profile_picture.url }}"
-        alt=""
-        class="mt-10"
-      />
-    </div>
-    {% endfor %}
-  </div>
-  <h1 class="font-barlow text-5xl capitalize text-[#ff5634] mt-20">Clinics</h1>
-  <p class="font-gilda text-gray-400 mt-5">
+  <h1 class="text-center text-5xl capitalize text-blue-500 mt-20">Clinics</h1>
+  <p class="text-black-500 mt-5">
     Explore the best vetinary clinics in your area
   </p>
   <div
@@ -84,18 +46,20 @@
             </div>
 
             <div class="absolute flex justify-center bottom-0 mb-3"></div>
-            {% if clinic.profile.is_open %}
-            <span
-              class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-green-500 text-sm font-medium text-white select-none"
-            >
-              Open
-            </span>
-            {% else %}
+            {% if clinic.opening_hour.is_closed %}
             <span
               class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none"
             >
               Closed
             </span>
+
+            {% else %}
+            <span
+              class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-green-500 text-sm font-medium text-white select-none"
+            >
+              Open
+            </span>
+
             {% endif %}
           </div>
 

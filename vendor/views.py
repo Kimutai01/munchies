@@ -9,8 +9,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
 from accounts.views import check_role_clinic, check_role_customer
-from .forms import VendorForm, OpeningHourForm, AppointmentForm
-from .models import OpeningHour, Appointment
+from .forms import VendorForm, OpeningHourForm, AppointmentForm, DoctorForm
+from .models import OpeningHour, Appointment, DoctorNote
 from django.http import JsonResponse
 from django.db import IntegrityError
 from accounts.utils import send_notification
@@ -169,7 +169,6 @@ def appointment_booking(request, pk):
     return render(request, 'appointment_booking.html', context)
 
 @login_required(login_url='login')
-@user_passes_test(check_role_customer)
 def edit_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
     form = AppointmentForm(instance=appointment)
@@ -192,7 +191,6 @@ def edit_appointment(request, pk):
     return render(request, 'appointment_booking.html', context)
 
 @login_required(login_url='login')
-@user_passes_test(check_role_customer)
 def cancel_appointment(request, pk):
     appointment = get_object_or_404(Appointment, pk=pk)
     appointment.delete()
@@ -207,9 +205,26 @@ def cancel_appointment(request, pk):
 
 def bookings(request):
     bookings = Appointment.objects.filter(vendor=request.user.vendor)
+    
+
+    form = DoctorForm()
+    
+    if request.method == 'POST':
+        form = DoctorForm(request.POST)
+        if form.is_valid():
+            doctor = form.save(commit=False)
+            doctor.vendor = request.user.vendor
+            doctor.save()
+            messages.success(request, 'Doctor added successfully.')
+            return redirect('bookings')
+        else:
+            print(form.errors)
+    
     print(bookings)
     context = {
-        'bookings': bookings
+        'bookings': bookings,
+        'form': form,
+        
     }
     return render(request, 'bookings.html', context)
 
@@ -234,4 +249,33 @@ def reject_appointment(request, appointment_id):
 
     messages.success(request, 'Appointment rejected successfully.')
     return redirect('bookings')
+
+def view_doctor_notes(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    notes = DoctorNote.objects.filter(appointment=appointment)
+    context = {
+        'notes': notes,
+        'appointment': appointment,
+    }
+    return render(request, 'view_doctor_notes.html', context)
+
+def add_doctor_notes(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+    if request.method == 'POST':
+        form = DoctorForm(request.POST)
+        if form.is_valid():
+            notes = form.save(commit=False)
+            notes.appointment = appointment
+            notes.save()
+            messages.success(request, 'Notes added successfully.')
+            return redirect('bookings')
+        else:
+            print(form.errors)
+    else:
+        form = DoctorForm()
+    context = {
+        'form': form,
+        'appointment': appointment,
+    }
+    return render(request, 'add_doctor_notes.html', context)
 

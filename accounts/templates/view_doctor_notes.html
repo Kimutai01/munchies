@@ -1,0 +1,5 @@
+{% extends 'main.html' %} {% block content %} {% include 'alerts.html' %}
+{% for notes in notes %} 
+<li>{{ notes }}</li>
+{% endfor %}   
+{% endblock %}

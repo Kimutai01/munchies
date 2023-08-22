@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Vendor, OpeningHour, Appointment
+from .models import Vendor, OpeningHour, Appointment, DoctorNote
 
 # Register your models here.
 class VendorAdmin(admin.ModelAdmin):
@@ -15,3 +15,4 @@ class OpeningHourAdmin(admin.ModelAdmin):
 admin.site.register(Vendor, VendorAdmin)
 admin.site.register(OpeningHour, OpeningHourAdmin)
 admin.site.register(Appointment)
+admin.site.register(DoctorNote)

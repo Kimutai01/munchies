@@ -246,4 +246,12 @@ def edit_customer_profile(request):
     }
     
     return render(request, 'customerProfile.html', context)
+
+def customer_booking(request):
+    bookings = Appointment.objects.filter(user=request.user)
+    
+    context = {
+        'bookings': bookings
+    }
+    return render(request, 'customerBooking.html', context)
     

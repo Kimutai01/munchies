@@ -14,12 +14,12 @@
       <div class="flex justify-center">
         <div class="">
           <img
-            class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-green-400"
-            src="https://image.flaticon.com/icons/png/512/149/149071.png"
+            class="hidden h-24 w-24 rounded-full sm:block object-cover mr-2 border-4 border-blue-400"
+            src="{% if request.user.profile.profile_pic %}{{request.user.profile.profile_pic.url}}{% else %}https://img.freepik.com/free-icon/user_318-804790.jpg{% endif %}"
             alt=""
           />
-          <p class="font-bold text-base text-gray-400 pt-2 text-center w-24">
-            Safwan
+          <p class="font-bold text-base text-[#fff] pt-2 text-center w-24">
+            {{request.user.first_name}} {{request.user.last_name}}
           </p>
         </div>
       </div>
@@ -30,7 +30,6 @@
               class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
               href="{% url 'customerDashboard' %}"
             >
-              >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6"
@@ -54,7 +53,7 @@
           <li class="relative px-2 py-1">
             <a
               class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
-              href=" #"
+              href="{% url 'customer-booking' %}"
             >
               <!-- svg to represent clinic for pets -->
 
@@ -75,32 +74,14 @@
                   clip-rule="evenodd"
                 />
               </svg>
-              <span class="ml-4">Upcoming bookings</span>
-            </a>
-          </li>
-          <li class="relative px-2 py-1">
-            <a
-              class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
-              href=" #"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <span
+                class="ml-4 {% if 'customerBooking' in request.path %}text-blue-500{% endif %} uppercase"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-
-              <span class="ml-4"> Change Password </span>
+                Upcoming bookings</span
+              >
             </a>
           </li>
+
           <li class="relative px-2 py-1">
             <a
               class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
@@ -122,36 +103,10 @@
               </svg>
 
               <span
-                class="ml-4 {% if 'profile' in request.path %}text-blue-500{% endif %}"
+                class="ml-4 {% if 'profile' in request.path %}text-blue-500{% endif %} uppercase"
               >
                 My profile
               </span>
-            </a>
-          </li>
-          <li class="relative px-2 py-1">
-            <a
-              class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 cursor-pointer hover:text-green-500"
-              href=" #"
-            >
-              <!-- svg to represent sign out -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-red-500"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 12a2 2 0 100-4 2 2 0 000 4z"
-                  clip-rule="evenodd"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M10 2a8 8 0 100 16 8 8 0 000-16zM1 10a9 9 0 1118 0 9 9 0 01-18 0z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-              <span class="ml-4">Sign out</span>
             </a>
           </li>
         </ul>

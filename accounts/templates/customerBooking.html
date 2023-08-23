@@ -30,7 +30,37 @@
           </svg>
         </button>
 
-
+        <!-- Search Input -->
+        <div class="flex justify-center mt-2 mr-4">
+          <div class="relative flex w-full flex-wrap items-stretch mb-3">
+            <input
+              type="search"
+              placeholder="Search"
+              {{
+              $attributes
+              }}
+              class="form-input px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white rounded-lg text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pr-10"
+            />
+            <span
+              class="z-10 h-full leading-snug font-normal text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 -mt-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
 
         <ul class="flex items-center flex-shrink-0 space-x-6">
           <!-- Notifications menu -->
@@ -182,200 +212,73 @@
         </ul>
       </div>
     </header>
-    <section
-      class="max-w-4xl p-10 bg-gray-100 rounded-md shadow-md dark:bg-gray-800 mt-20"
-    >
-      <form
-        method="POST"
-        action="{% url 'edit_customer' %}"
-        enctype="multipart/form-data"
-      >
-        {% csrf_token %}
-        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-          <div>
-            <label class="text-white dark:text-gray-200 capitalize" for="username">
-              first name
-            </label>
-            {% comment %} {{customer_form.first_name}} {% endcomment %}
-            <input
-              type="text"
-              name="first_name"
-              id="first_name"
-              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple"
-              value="{{customer_form.first_name.value}}"
-            />
-          </div>
-
-          <div>
-            <label class="text-white dark:text-gray-200 capitalize" for="username">
-              second name
-            </label>
-            {% comment %} {{customer_form.last_name}} {% endcomment %}
-            <input
-              type="text"
-              name="last_name"
-              id="last_name"
-              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple"
-              value="{{customer_form.last_name.value}}"
-            />
-          </div>
-          <div>
-            <label class="text-white dark:text-gray-200" for="username">
-              Username
-            </label>
-            {% comment %} {{customer_form.username}} {% endcomment %}
-            <input
-              type="text"
-              name="username"
-              id="username"
-              class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple"
-              value="{{customer_form.username.value}}"
-            />
-          </div>
-          <div>
-            <label class="text-white dark:text-gray-200 capitalize" for="username">
-              Address
-            </label>
-            {{profile_form.address}}
-          </div>
-
-          <div>
-            <label class="text-white dark:text-gray-200" for="username">
-              Country
-            </label>
-            {{profile_form.country}}
-          </div>
-          <div>
-            <label class="text-white dark:text-gray-200" for="username">
-              County
-            </label>
-            {{profile_form.county}}
-          </div>
-          <div>
-            <label class="text-white dark:text-gray-200" for="username">
-              City
-            </label>
-            {{profile_form.city}}
-          </div>
-          <div>
-            <label class="text-white dark:text-gray-200" for="username">
-              postal code
-            </label>
-            {{profile_form.postal_code}}
-          </div>
-          <div>
-            <label class="text-white dark:text-gray-200" for="username">
-              longitude
-            </label>
-            {{profile_form.longitude}}
-          </div>
-          <div>
-            <label class="text-white dark:text-gray-200" for="username">
-              latitude
-            </label>
-            {{profile_form.latitude}}
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-white">
-              Cover picture</label
-            >
-            <div
-              class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
-            >
-              <div class="space-y-1 text-center">
-                {% if profile.cover_picture.url %}
-                <img
-                  src="{{profile.cover_picture.url}}"
-                  alt="cover picture"
-                  class="mx-auto h-20 w-20 text-white rounded-md"
-                />
-                {% else %}
+    <section class="text-gray-600 body-font">
+      <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-wrap -m-4">
+          {% for booking in bookings %}
+          <div class="xl:w-1/3 md:w-1/2 p-4">
+            <div class="border border-gray-200 p-6 rounded-lg">
+              <div
+                class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4"
+              >
                 <svg
-                  class="mx-auto h-12 w-12 text-white"
-                  stroke="currentColor"
                   fill="none"
-                  viewBox="0 0 48 48"
-                  aria-hidden="true"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  class="w-6 h-6"
+                  viewBox="0 0 24 24"
                 >
-                  <path
-                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
                 </svg>
-                {% endif %}
-                <div class="flex text-sm text-gray-600">
-                  <label
-                    for="file-upload"
-                    class="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+              </div>
+              <h2 class="text-lg text-[#fff] font-medium title-font mb-2">
+                {{booking.date}} - {{booking.time}}
+              </h2>
+              <p class="leading-relaxed text-[#fff] text-base">{{booking.user}}</p>
+              <div class="flex gap-10">
+                <button
+                  class="mb-2 mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  <a
+                    href="{% url 'view_doctor_notes' appointment_id=booking.id %}"
+                    >View notes
+                  </a>
+                </button>
+                {% if request.user.vendor %}
+                <button
+                  class="mb-2 mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded"
+                >
+                  <a
+                    href="{% url 'add_doctor_notes' appointment_id=booking.id %}"
+                    >Add notes
+                  </a>
+                </button>
+              </div>
+
+              <div class="flex justify-between">
+                <div class="flex justify-between gap-10">
+                  <a
+                    href="{% url 'approve_appointment' appointment_id=booking.id %}"
+                    class="flex items-center justify-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
                   >
-                    {{profile_form.cover_picture}}
-                  </label>
+                    Approve
+                  </a>
+                  <a
+                    href="{% url 'reject_appointment' appointment_id=booking.id %}"
+                    class="flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700"
+                  >
+                    Reject
+                  </a>
                 </div>
-                <p class="text-xs text-white">PNG, JPG, GIF up to 10MB</p>
-                <label class="text-red-500">
-                  {{profile_form.cover_picture.errors}}
-                </label>
+                {% endif %}
               </div>
             </div>
           </div>
-
-          <div>
-            <label class="block text-sm font-medium text-white"> Logo</label>
-            <div
-              class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
-            >
-              <div class="space-y-1 text-center">
-                {% if profile.profile_picture.url %}
-                <img
-                  class="mx-auto h-20 w-20 text-white rounded-md"
-                  src="{{profile.profile_picture.url}}"
-                  alt="profile picture"
-                />
-                {% else %}
-                <svg
-                  class="mx-auto h-12 w-12 text-white"
-                  stroke="currentColor"
-                  fill="none"
-                  viewBox="0 0 48 48"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                {% endif %}
-                <div class="flex text-sm text-gray-600">
-                  <label
-                    for="file-upload"
-                    class="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                  >
-                    {{profile_form.profile_picture}}
-                  </label>
-                </div>
-                <p class="text-xs text-white">PNG, JPG, GIF up to 10MB</p>
-                <label class="text-red-500">
-                  {{profile_form.profile_picture.errors}}
-                </label>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
-
-        <div class="flex justify-end mt-6">
-          <button
-            class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
-            type="submit"
-          >
-            Update Profile
-          </button>
-        </div>
-      </form>
+      </div>
     </section>
   </div>
 </div>
@@ -405,10 +308,6 @@
       mobileSidebarBackdrop.style.display = "none";
     }
   }
-</script>
-
-<script>
-  // ... (rest of your chart initialization scripts)
 </script>
 
 {% endblock %}

@@ -29,7 +29,7 @@
         <li
           class="ml-10 font-medium text-[#eee] uppercase text-sm hover:text-[#cda873] hover:scale-105 transition-colors duration-300"
         >
-          <a href="{% url 'home' %}">Home</a>
+          <a href="{% url 'home' %}">Clinics</a>
         </li>
 
         {% if user.is_authenticated %}
@@ -140,7 +140,7 @@
     closeIcon.addEventListener("click", handleMobileNav);
 
     var x = document.getElementById("location");
-    var current_location = sessionStorage.getItem("current_location");
+    let current_location = sessionStorage.getItem("current_location");
     if (current_location != "") {
       x.value = current_location;
     }
@@ -154,15 +154,14 @@
     }
 
     function showPosition(position) {
-      var lat = position.coords.latitude;
-      var lng = position.coords.longitude;
+      let lat = position.coords.latitude;
+      let lng = position.coords.longitude;
 
-      // var lat = '19.0713949'
-      // var lng = '72.9984126'
+      //from the coordinates get City
 
       // hit AJAX request to googlemaps api endpoint and get the location data using those lat and lng
-      var GOOGLE_API_KEY = "{{ GOOGLE_API_KEY }}";
-      var url =
+      let GOOGLE_API_KEY = "{{ GOOGLE_API_KEY }}";
+      let url =
         "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
         lat +
         "," +
@@ -174,7 +173,7 @@
         url: url,
         type: "GET",
         success: function (response) {
-          var current_location = response.results[0].formatted_address;
+          let current_location = response.results[0].formatted_address;
           x.value = current_location;
           sessionStorage.setItem("current_location", current_location);
           window.location = "?lat=" + lat + "&lng=" + lng;

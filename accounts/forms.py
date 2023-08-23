@@ -9,6 +9,12 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'email','password']
     
+    widgets = {
+        'first_name': forms.TextInput(attrs={'class': 'w-full px-4 py-4 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500'}),
+        'last_name': forms.TextInput(attrs={'class': 'w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500'}),
+        'username': forms.TextInput(attrs={'class': 'w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500'}),
+        'email': forms.TextInput(attrs={'class': 'w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500'}),
+    }
         
     def clean(self):
         cleaned_data = super(UserForm, self).clean()
@@ -20,12 +26,7 @@ class UserForm(forms.ModelForm):
                 "passwords do not match"
             )
         
-    widgets = {
-        'first_name': forms.TextInput(attrs={'class': 'w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500'}),
-        'last_name': forms.TextInput(attrs={'class': 'w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500'}),
-        'username': forms.TextInput(attrs={'class': 'w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500'}),
-        'email': forms.TextInput(attrs={'class': 'w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500'}),
-    }
+   
     
 class ProfileForm(forms.ModelForm):
     class Meta:

@@ -11,7 +11,7 @@ COPY . .
 RUN pip install -r requirements.txt
 
 RUN python manage.py collectstatic --noinput
-RUN python manage.py makemigrations
-RUN python manage.py migrate || true
+RUN python manage.py makemigrations --noinput || true
+RUN python manage.py migrate --noinput || true
 
 CMD python manage.py runserver 0.0.0.0:$PORT

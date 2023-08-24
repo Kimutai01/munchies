@@ -120,7 +120,7 @@ $(document).ready(function () {
                 response.from_hour +
                 "</td><td class='border px-4 py-2'>" +
                 response.to_hour +
-                "</td><td class='border px-4 py-2'>Delete</td></tr>";
+                "</td><td class='border px-8 py-4 font-bold text-red-500 rounded hover:text-red-700'>Delete</td></tr>";
             }
 
             $(".hours_table").append(html);
@@ -140,7 +140,5 @@ $(document).ready(function () {
     } else {
       swal("Error!", "Please fill all the fields", "error");
     }
-   
-    
   });
 });

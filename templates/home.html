@@ -7,7 +7,7 @@
     <h1 class="text-center text-5xl text-white">
       Is your pet sick? Find a clinic near you
     </h1>
-    <p class="text-gray-400  text-center mt-5">
+    <p class="text-gray-400 text-center mt-5">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
       voluptatibus, voluptatem, quibusdam, quia voluptates voluptatum voluptate
       quos doloribus quod quas? Quisquam voluptatibus, voluptatem, quibusdam,
@@ -17,7 +17,9 @@
 </div>
 
 <div class="w-[90%] mx-auto mt-20">
-  <h1 class="text-center text-3xl font-bold text-blue-500 mt-20 uppercase">Clinics</h1>
+  <h1 class="text-center text-3xl font-bold text-blue-500 mt-20 uppercase">
+    Clinics
+  </h1>
   <p class="text-black-500 text-lg mt-5 text-center">
     Explore the best vetinary clinics in your area
   </p>
@@ -46,18 +48,19 @@
             </div>
 
             <div class="absolute flex justify-center bottom-0 mb-3"></div>
-            {% if clinic.opening_hour.is_closed %}
-            <span
-              class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none"
-            >
-              Closed
-            </span>
+            {% if clinic.is_open %}
 
-            {% else %}
             <span
               class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-green-500 text-sm font-medium text-white select-none"
             >
               Open
+            </span>
+            {% else %}
+
+            <span
+              class="absolute top-0 left-0 inline-flex mt-3 ml-3 px-3 py-2 rounded-lg z-10 bg-red-500 text-sm font-medium text-white select-none"
+            >
+              Closed
             </span>
 
             {% endif %}

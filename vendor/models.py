@@ -23,6 +23,7 @@ class Vendor(models.Model):
     def is_open(self):
         # Check current day's opening hours.
         today_date = date.today()
+        
         today = today_date.isoweekday()
         
         current_opening_hours = OpeningHour.objects.filter(vendor=self, day=today)
@@ -78,15 +79,12 @@ DAYS = [
     (7, 'Sunday'),
 ]
 
-HOUR_OF_DAY_24 = [
-    (time(h, m), time(h, m).strftime('%I:%M %p')) for h in range(0, 24) for m in (0, 30)
-]
-
+HOUR_OF_DAY_24 = [(time(h, m).strftime('%I:%M %p'), time(h, m).strftime('%I:%M %p')) for h in range(0, 24) for m in (0, 30)]
 class OpeningHour(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     day = models.PositiveSmallIntegerField(choices=DAYS)
-    from_hour = models.CharField(choices=HOUR_OF_DAY_24, null=True, blank=True)
-    to_hour = models.CharField(choices=HOUR_OF_DAY_24, null=True, blank=True)
+    from_hour = models.CharField(choices=HOUR_OF_DAY_24, max_length=10, blank=True)
+    to_hour = models.CharField(choices=HOUR_OF_DAY_24, max_length=10, blank=True)
     is_closed = models.BooleanField(default=False)
     
     created_at = models.DateTimeField(auto_now_add=True)

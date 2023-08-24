@@ -10,17 +10,25 @@ services:
     volumes:
       - .:/app
     restart: always
+    networks:
+      - vet
   db:
     image: postgres:14
     environment:
       POSTGRES_USER: hero
       POSTGRES_PASSWORD: hero
       POSTGRES_DB: munchies
-    ports:
-      - "5433:5432"
+   
     volumes:
       - ./postgres_data:/var/lib/postgresql/data/
     restart: always
 
+    networks:
+      - vet
+
 volumes:
   postgres_data:
+
+networks:
+  vet:
+    external: false

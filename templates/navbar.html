@@ -90,7 +90,7 @@
     <div>
       <div class="flex justify-between items-center w-full mt-3 px-3">
         <a class="text-[#eee] font-bold text-3xl font-allura" href=""
-          >Munchies</a
+          >Vet clinics</a
         >
         <div id="close-icon" class="cursor-pointer text-[#fff] text-3xl">
           <i class="fa fa-times"></i>
@@ -100,21 +100,36 @@
     <div>
       <div class="flex flex-col items-center text-[#fff] font-barlow py-4">
         <ul>
+          {% if user.is_authenticated %}
           <li class="ml-3 mt-10 text-xl uppercase">
-            <a href="">Home</a>
+            <a href="{% url 'myAccount' %}">My account</a>
           </li>
-          <li class="py-4 mt-10 text-xl ml-3 cursor-pointer uppercase">
-            <a href="">Listing</a>
-          </li>
+          {% endif %} {% if user.is_authenticated %}
           <li class="ml-3 mt-10 text-xl uppercase">
-            <a href="">Tenant</a>
+            <a
+              class="py-1 hover:text-[#cda873] hover:scale-105 transition-all duration-all rounded-md font-medium"
+              href="{% url 'logout' %}"
+            >
+              Logout
+            </a>
           </li>
+          {% else %}
+          <li class="ml-3 mt-10 text-xl uppercase">
+            <a class="flex flex-col">
+              <span
+                class="py-1 hover:text-[#cda873] hover:scale-105 transition-all duration-all rounded-md font-medium"
+              >
+                <a href="{% url 'register-user' %}">Register </a>
+              </span>
 
-          <li class="py-4 mt-10 text-xl ml-3 cursor-pointer uppercase">
-            <a href="">Agents</a>
-          </li>
-          <li class="py-4 mt-10 text-xl ml-3 cursor-pointer uppercase">
-            <a href="{% url 'login' %}">Login</a>
+              <span
+                class="px-2 py-1 hover:text-[#cda873] hover:scale-105 transition-all duration-all rounded-md text-[#fff] font-medium"
+              >
+                <a href="{% url 'login' %}">Login</a>
+              </span>
+            </a>
+
+            {% endif %}
           </li>
         </ul>
       </div>
